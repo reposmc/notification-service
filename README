@@ -1,0 +1,3 @@
+# Generate VAPID Keys
+
+    npx web-push generate-vapid-keys
