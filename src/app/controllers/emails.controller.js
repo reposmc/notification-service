@@ -7,6 +7,11 @@ const csvToJson = require("csvtojson");
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport(mail.nodemailer);
 
+/**
+ * Dispatch the email to the sender.
+ * 
+ * @param {*} email 
+ */
 const dispatchEmail = async (email) => {
   // send mail with defined transport object
   let info = await transporter.sendMail({
@@ -21,6 +26,13 @@ const dispatchEmail = async (email) => {
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 };
 
+/**
+ * Send an email soon as received.
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns {*} res
+ */
 const sendEmail = async (req, res) => {
   let email = {
     to: req.body.to, // list of receivers
@@ -37,9 +49,15 @@ const sendEmail = async (req, res) => {
   });
 };
 
+/**
+ * Add the emails to the queue to send it later.
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const addEmailToQueue = async (req, res) => {
   try {
-    // console.log(req.body.attachments);
     await Queue.create([{
       to: req.body.to, // list of receivers
       subject: req.body.subject, // Subject line
@@ -59,6 +77,15 @@ const addEmailToQueue = async (req, res) => {
   }
 };
 
+
+/**
+ * 
+ * Adds an array of emails to the queue.
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const addListEmailsToQueue = async (req, res) => {
 
   // Creating the array of mailables
@@ -86,6 +113,14 @@ const addListEmailsToQueue = async (req, res) => {
   });
 };
 
+/**
+ * 
+ * Dispatch the next emails in the queue to be sent.
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const dispatchEmails = async (req, res) => {
   try {
     const totalEmails = await getEmailsQueue();
@@ -106,6 +141,11 @@ const dispatchEmails = async (req, res) => {
   }
 };
 
+/**
+ * Get from DB the next mails to be sent and dispatch them.
+ * 
+ * @returns 
+ */
 const getEmailsQueue = async () => {
   const emails = await Queue.find().limit(mail.emailsToBeSent);
 
@@ -118,6 +158,14 @@ const getEmailsQueue = async () => {
   return emails.length;
 };
 
+/**
+ * 
+ * Reads a csv file to then sent the files of mails to the queue.
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const addEmailsToQueueFromCsv = async (req, res) => {
   const csvData = req.files.data.data.toString("utf8");
 
