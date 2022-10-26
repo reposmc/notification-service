@@ -10,11 +10,11 @@ const subscribe = async (req, res) => {
       endpoint: pushSuscription.endpoint,
     });
 
-    // if (!notifiable) {
-    const newNotifiable = new Notifiable(pushSuscription);
+    if (!notifiable) {
+      const newNotifiable = new Notifiable(pushSuscription);
 
-    await newNotifiable.save();
-    // }
+      await newNotifiable.save();
+    }
 
     return res.status(200).json({
       success: true,

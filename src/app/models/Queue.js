@@ -1,6 +1,6 @@
 const { mongoose } = require("mongoose");
 
-const Queue = mongoose.model("Queue", {
+const Queue = new mongoose.model("Queue", {
   from: String,
   to: String,
   subject: String,

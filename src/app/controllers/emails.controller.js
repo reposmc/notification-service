@@ -39,13 +39,13 @@ const sendEmail = async (req, res) => {
 
 const addEmailToQueue = async (req, res) => {
   try {
-    console.log(req.body.attachments);
-    await Queue.insertMany({
+    // console.log(req.body.attachments);
+    await Queue.create([{
       to: req.body.to, // list of receivers
       subject: req.body.subject, // Subject line
       html: req.body.html, // html body
       attachments: req.body.attachments ?? [],
-    });
+    }]);
 
     return res.status(200).json({
       success: true,
@@ -53,15 +53,27 @@ const addEmailToQueue = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      success: true,
+      success: false,
       message: "Email cannot be added. Error: " + error.message,
     });
   }
 };
 
 const addListEmailsToQueue = async (req, res) => {
+
+  // Creating the array of mailables
+  let emailsToQueue = []
+  req.body.emails.forEach(email => {
+    emailsToQueue.push({
+      to: email, // list of receivers
+      subject: req.body.subject, // Subject line
+      html: req.body.html, // html body
+      attachments: req.body.attachments ?? [],
+    })
+  });
+
   // Adding emails to queue
-  await Queue.insertMany(req.body.emails);
+  await Queue.insertMany(emailsToQueue);
 
   const totalEmailsAdded = req.body.emails.length;
 
@@ -85,6 +97,7 @@ const dispatchEmails = async (req, res) => {
         totalEmailsSent: totalEmails,
       },
     });
+
   } catch (error) {
     return res.status(500).json({
       success: true,
