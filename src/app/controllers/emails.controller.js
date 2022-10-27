@@ -200,3 +200,10 @@ module.exports = {
   addEmailsToQueueFromCsv,
   getEmailsQueue,
 };
+
+// db.createUser(
+//   {
+//     user: "notifications",
+//     pwd: "Cultura123!",
+//     roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase"]
+//   })

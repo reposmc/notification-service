@@ -12,19 +12,19 @@ services:
     ports:
       - "3000:3000"
 
-  database:
-    image: mongo:latest
-    restart: on-failure:3
-    ports:
-     - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: $DATABASE_USER
-      MONGO_INITDB_ROOT_PASSWORD: $DATABASE_PASSWORD
-      MONGO_INITDB_DATABASE: $DATABASE_NAME
-    volumes: 
-      - ./mongodb:/data/db
-    logging:
-      driver: none
+  # database:
+  #   image: mongo:latest
+  #   restart: on-failure:3
+  #   ports:
+  #    - "27017:27017"
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: $DATABASE_USER
+  #     MONGO_INITDB_ROOT_PASSWORD: $DATABASE_PASSWORD
+  #     MONGO_INITDB_DATABASE: $DATABASE_NAME
+  #   volumes: 
+  #     - ./mongodb:/data/db
+  #   logging:
+  #     driver: none
 
 volumes:
   mongodb:

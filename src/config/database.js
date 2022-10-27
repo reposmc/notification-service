@@ -3,7 +3,11 @@ const { env } = require("./app");
 
 const connect = async () => {
   const db = await mongoose.connect(
-    `mongodb://${env.DATABASE_USER}:${env.DATABASE_PASSWORD}@${env.DATABASE_HOST}:${env.DATABASE_PORT}`
+    `mongodb://${env.DATABASE_USER}:${env.DATABASE_PASSWORD}@${env.DATABASE_HOST}:${env.DATABASE_PORT}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: 'notifications',
+  }
   )
 };
 
