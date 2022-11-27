@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "e364ba46-f023-4ec3-afeb-fcaf335a5d49",
+		"name": "Nofication service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Send Notification",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Sistema de solicitudes\",\n    \"message\": \"Nueva solicitud recibida\",\n    \"image\": \"https://www.cultura.gob.sv/wp-content/uploads/2021/06/MinisterioCultura.png\",\n    \"tag\": \"New request\",\n    \"url\": \"https://comunicaciones.cultura.gob.sv\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/sendNotification",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"sendNotification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sendEmail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to\": \"leonellopez647@gmail.com\",\n    \"subject\": \"Correo de prueba\",\n    \"html\": \"<b>Hola</b>\",\n    \"attachments\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/sendEmail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"sendEmail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addEmailToQueue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to\": \"lalopez@cultura.gob.sv\",\n    \"subject\": \"Correo de prueba\",\n    \"html\": \"<b>Hola</b>\",\n    \"attachments\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/addEmailToQueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"addEmailToQueue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addListEmailsToQueue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"emails\": [\n            {\n                \"to\": \"lalopez@cultura.gob.sv\",\n                \"subject\": \"Correo de prueba\",\n                \"html\": \"<b>Hola</b>\",\n                \"attachments\": []\n            }\n        ]\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/addListEmailsToQueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"addListEmailsToQueue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dispatchEmails",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"emails\": [\n            {\n                \"to\": \"lalopez@cultura.gob.sv\",\n                \"subject\": \"Correo de prueba\",\n                \"html\": \"<b>Hola</b>\",\n                \"attachments\": []\n            }\n        ]\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/dispatchEmails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dispatchEmails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addEmailsToQueueFromCsv",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "data",
+							"value": "",
+							"type": "default"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/addListEmailsToQueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"addListEmailsToQueue"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
