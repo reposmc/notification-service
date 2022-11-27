@@ -30,6 +30,18 @@ services:
     networks:
       - notification_service
 
+  smtp:
+    platform: linux/x86_64
+    image: mailhog/mailhog
+    container_name: mailhog
+    logging:
+      driver: 'none'
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - notification_service
+
 volumes:
   mongodb:
     driver: local

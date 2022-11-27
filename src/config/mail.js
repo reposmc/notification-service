@@ -7,7 +7,7 @@ const mail = {
   nodemailer: {
     host: process.env.MAIL_HOST, // sender address
     port: process.env.MAIL_PORT,
-    secure: process.env.MAIL_SECURE, // true for 465, false for other ports
+    // secure: process.env.MAIL_SECURE, // true for 465, false for other ports
     auth: {
       user: process.env.MAIL_USERNAME, // generated ethereal user
       pass: process.env.MAIL_PASSWORD, // generated ethereal password
@@ -26,7 +26,7 @@ const mail = {
    * Total emails to be sent each dispatch.
    *
    */
-  emailsToBeSent: process.env.MAILS_TO_BE_SENT,
+  emailsToBeSent: process.env.EMAILS_TO_BE_SENT || 15,
 
   /**
    *

@@ -9,8 +9,8 @@ let transporter = nodemailer.createTransport(mail.nodemailer);
 
 /**
  * Dispatch the email to the sender.
- * 
- * @param {*} email 
+ *
+ * @param {*} email
  */
 const dispatchEmail = async (email) => {
   // send mail with defined transport object
@@ -28,9 +28,9 @@ const dispatchEmail = async (email) => {
 
 /**
  * Send an email soon as received.
- * 
- * @param {*} req 
- * @param {*} res 
+ *
+ * @param {*} req
+ * @param {*} res
  * @returns {*} res
  */
 const sendEmail = async (req, res) => {
@@ -51,19 +51,21 @@ const sendEmail = async (req, res) => {
 
 /**
  * Add the emails to the queue to send it later.
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
 const addEmailToQueue = async (req, res) => {
   try {
-    await Queue.create([{
-      to: req.body.to, // list of receivers
-      subject: req.body.subject, // Subject line
-      html: req.body.html, // html body
-      attachments: req.body.attachments ?? [],
-    }]);
+    await Queue.create([
+      {
+        to: req.body.to, // list of receivers
+        subject: req.body.subject, // Subject line
+        html: req.body.html, // html body
+        attachments: req.body.attachments ?? [],
+      },
+    ]);
 
     return res.status(200).json({
       success: true,
@@ -77,26 +79,24 @@ const addEmailToQueue = async (req, res) => {
   }
 };
 
-
 /**
- * 
+ *
  * Adds an array of emails to the queue.
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
 const addListEmailsToQueue = async (req, res) => {
-
   // Creating the array of mailables
-  let emailsToQueue = []
-  req.body.emails.forEach(email => {
+  let emailsToQueue = [];
+  req.body.emails.forEach((email) => {
     emailsToQueue.push({
       to: email, // list of receivers
       subject: req.body.subject, // Subject line
       html: req.body.html, // html body
       attachments: req.body.attachments ?? [],
-    })
+    });
   });
 
   // Adding emails to queue
@@ -114,12 +114,12 @@ const addListEmailsToQueue = async (req, res) => {
 };
 
 /**
- * 
+ *
  * Dispatch the next emails in the queue to be sent.
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
 const dispatchEmails = async (req, res) => {
   try {
@@ -132,7 +132,6 @@ const dispatchEmails = async (req, res) => {
         totalEmailsSent: totalEmails,
       },
     });
-
   } catch (error) {
     return res.status(500).json({
       success: true,
@@ -143,8 +142,8 @@ const dispatchEmails = async (req, res) => {
 
 /**
  * Get from DB the next mails to be sent and dispatch them.
- * 
- * @returns 
+ *
+ * @returns
  */
 const getEmailsQueue = async () => {
   const emails = await Queue.find().limit(mail.emailsToBeSent);
@@ -159,12 +158,12 @@ const getEmailsQueue = async () => {
 };
 
 /**
- * 
+ *
  * Reads a csv file to then sent the files of mails to the queue.
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
 const addEmailsToQueueFromCsv = async (req, res) => {
   const csvData = req.files.data.data.toString("utf8");
