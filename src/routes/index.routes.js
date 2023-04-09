@@ -21,7 +21,7 @@ const {
 
 const router = Router();
 
-router.get("/state", (req, res) => {
+router.get("/status", (req, res) => {
   return res.json({
     message: "Active",
   });
