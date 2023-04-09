@@ -2,13 +2,15 @@ const mongoose = require("mongoose");
 const { env } = require("./app");
 
 const connect = async () => {
+  mongoose.set("strictQuery", false);
   const db = await mongoose.connect(
-    `mongodb://${env.DATABASE_USER}:${env.DATABASE_PASSWORD}@${env.DATABASE_HOST}:${env.DATABASE_PORT}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    dbName: 'notifications',
-  }
-  )
+    `mongodb://${env.DATABASE_USER}:${env.DATABASE_PASSWORD}@${env.DATABASE_HOST}:${env.DATABASE_PORT}?authSource=admin`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: "notifications",
+    }
+  );
 };
 
 try {

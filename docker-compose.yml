@@ -1,39 +1,26 @@
 version: '3.7'
 
+networks:
+  api-network:
+    external: true
+
 services:
   app:
-    build: .
-    restart: on-failure:3
-    command: npm run dev
-    depends_on:
-      - database
+    image: node:18-alpine
+    container_name: notifications
+    command: npm start
+    restart: always
+    working_dir: /usr/app
     volumes:
       - ./:/usr/app
-    ports:
-      - "3000:3000"
+    expose:
+      - 3000
     networks:
-      - notification_service
-
-  database:
-    image: mongo:latest
-    restart: on-failure:3
-    ports:
-     - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: $DATABASE_USER
-      MONGO_INITDB_ROOT_PASSWORD: $DATABASE_PASSWORD
-      MONGO_INITDB_DATABASE: $DATABASE_NAME
-    volumes: 
-      - ./mongodb:/data/db
-    logging:
-      driver: none
-    networks:
-      - notification_service
-
-volumes:
-  mongodb:
-    driver: local
-
-networks:
-  notification_service:
-    driver: bridge 
+      - api-network
+  
+  npm:
+    image: node:18-alpine
+    volumes:
+      - ./:/usr/app
+    working_dir: /usr/app
+    entrypoint: ["npm"]

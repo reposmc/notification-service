@@ -6,8 +6,8 @@ const mail = {
    */
   nodemailer: {
     host: process.env.MAIL_HOST, // sender address
-    port: process.env.MAIL_PORT,
-    // secure: process.env.MAIL_SECURE, // true for 465, false for other ports
+    port: process.env.MAIL_PORT * 1,
+    secure: process.env.MAIL_SECURE == "true", // true for 465, false for other ports
     auth: {
       user: process.env.MAIL_USERNAME, // generated ethereal user
       pass: process.env.MAIL_PASSWORD, // generated ethereal password

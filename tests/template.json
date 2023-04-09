@@ -1,0 +1,14 @@
+{
+  "to": "leonellopez647@gmail.com",
+  "subject": "Correo de prueba",
+  "html": "<b>Hola</b>",
+  "attachments": [],
+  "title": "Título de prueba",
+  "introduction": "Leaksdfhaskjdf asdkjfhaskdfj kjahsdfkjahsd fkjashdfkasdhf asdfjhasdkfhsk asjdkfhasdfh",
+  "buttonText": "Botón de prueba",
+  "text": "Leaksdfhaskjdf asdkjfhaskdfj kjahsdfkjahsd fkjashdfkasdhf asdfjhasdkfhsk asjdkfhasdfh kasdjhfkjsdaf aksjdfhskadjf aksjdfhkjsadf kjahsdfkj asdfkhj askdjfhkasjdhf k akjsdfhkashdf ksa aksdhfkjasdhf",
+  "url": "urlText",
+  "urlText": "Url dentro del botón de prueba",
+  "urlImage": "https://login.cultura.gob.sv/logos/Cultura_logo.jpg",
+  "applicationName": "Sistema estadístico de espacios públicos"
+}

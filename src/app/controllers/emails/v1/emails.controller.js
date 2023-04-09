@@ -1,8 +1,15 @@
 const nodemailer = require("nodemailer");
-const mail = require("../../config/mail");
-const Queue = require("../models/Queue");
+const mail = require("../../../../config/mail");
+const Queue = require("../../../models/Queue");
+const Handlebars = require("handlebars");
+const fs = require("fs");
+
+Handlebars.registerHelper("isdefined", function (value) {
+  return value !== undefined;
+});
 
 const csvToJson = require("csvtojson");
+const path = require("path");
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport(mail.nodemailer);
@@ -192,6 +199,7 @@ const addEmailsToQueueFromCsv = async (req, res) => {
 };
 
 module.exports = {
+  dispatchEmail,
   sendEmail,
   addEmailToQueue,
   addListEmailsToQueue,
@@ -199,10 +207,3 @@ module.exports = {
   addEmailsToQueueFromCsv,
   getEmailsQueue,
 };
-
-// db.createUser(
-//   {
-//     user: "notifications",
-//     pwd: "Cultura123!",
-//     roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase"]
-//   })

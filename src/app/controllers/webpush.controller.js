@@ -1,6 +1,7 @@
 const webpush = require("web-push");
 const wbp = require("../../webpush");
 const Notifiable = require("../models/Notifiable");
+const { make } = require("simple-body-validator");
 
 const subscribe = async (req, res) => {
   try {
@@ -31,14 +32,25 @@ const subscribe = async (req, res) => {
 
 const sendNotification = async (req, res) => {
   try {
-    const notifiables = await Notifiable.find();
-    const payload = JSON.stringify({
+    const data = {
       title: req.body.title,
       message: req.body.message,
       image: "../../assets/logo.png",
       tag: req.body.tag,
       url: req.body.url,
-    });
+    };
+    const rules = {
+      title: "required",
+      message: "required",
+    };
+
+    const validator = make(data, rules);
+    if (!validator.validate()) {
+      return res.status(400).json(validator.errors().all());
+    }
+
+    const notifiables = await Notifiable.find();
+    const payload = JSON.stringify(data);
 
     notifiables.forEach(async (notifiable) => {
       await webpush.sendNotification(notifiable, payload);

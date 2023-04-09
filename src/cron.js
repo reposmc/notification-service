@@ -1,6 +1,8 @@
 const cron = require("node-cron");
 const mail = require("./config/mail");
-const { getEmailsQueue } = require("./app/controllers/emails.controller");
+const {
+  getEmailsQueue,
+} = require("./app/controllers/emails/v1/emails.controller");
 
 cron.schedule(mail.cronJob, async () => {
   try {
