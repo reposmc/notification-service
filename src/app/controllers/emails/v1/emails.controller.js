@@ -20,17 +20,21 @@ let transporter = nodemailer.createTransport(mail.nodemailer);
  * @param {*} email
  */
 const dispatchEmail = async (email) => {
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: mail.mailFrom, // sender address
-    to: email.to, // list of receivers
-    subject: email.subject, // Subject line
-    html: email.html, // html body
-    attachments: email.attachments,
-  });
+  try {
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: mail.mailFrom, // sender address
+      to: email.to, // list of receivers
+      subject: email.subject, // Subject line
+      html: email.html, // html body
+      attachments: email.attachments,
+    });
 
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /**

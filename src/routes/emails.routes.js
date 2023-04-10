@@ -23,16 +23,16 @@ router.post("/", (req, res) => {
 });
 
 // V1 it's needed to pass template as a parameter
-// router.post("/v1/sendEmail", sendEmail);
-// router.post("/v1/addEmailToQueue", addEmailToQueue);
-// router.post("/v1/addListEmailsToQueue", addListEmailsToQueue);
-// router.post("/v1/dispatchEmails", dispatchEmails);
-// router.post("/v1/addEmailsToQueueFromCsv", addEmailsToQueueFromCsv);
+router.post("/v1/sendEmail", sendEmail);
+router.post("/v1/addEmailToQueue", addEmailToQueue);
+router.post("/v1/addListEmailsToQueue", addListEmailsToQueue);
+router.post("/v1/dispatchEmails", dispatchEmails);
+router.post("/v1/addEmailsToQueueFromCsv", addEmailsToQueueFromCsv);
 
 // V2 use templates to send emails
-router.post("/sendEmail", sendEmailFromTemplate);
-// router.post("/v2/addEmailToQueue", addEmailToQueueFromTemplate);
-// router.post("/v2/addListEmailsToQueue", addListEmailsToQueueFromTemplate);
-// router.post("/v2/addEmailsToQueueFromCsv", addEmailsToQueueFromCsvFromTemplate);
+router.post("/v2/sendEmail", sendEmailFromTemplate);
+router.post("/v2/addEmailToQueue", addEmailToQueueFromTemplate);
+router.post("/v2/addListEmailsToQueue", addListEmailsToQueueFromTemplate);
+router.post("/v2/addEmailsToQueueFromCsv", addEmailsToQueueFromCsvFromTemplate);
 
 module.exports = router;

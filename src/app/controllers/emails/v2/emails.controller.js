@@ -59,10 +59,13 @@ const createDataTemplate = (req, res) => {
 
   //   Validates the form
   if (!validator.validate()) {
-    return res.status(400).json(validator.errors().all());
+    return { errors: validator.errors().all(), data: null };
   }
 
-  return dataTemplate;
+  return {
+    errors: null,
+    data: dataTemplate,
+  };
 };
 
 /**
@@ -83,29 +86,56 @@ const createDataEmail = (req, res, rules) => {
   const validator = make(email, rules);
 
   if (!validator.validate()) {
-    return res.status(400).json(validator.errors().all());
+    // res.status(400).json();
+    return { errors: validator.errors().all(), data: null };
   }
 
-  return email;
+  return {
+    errors: null,
+    data: email,
+  };
 };
 
+/**
+ * Send an email soon as received.
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns {*} res
+ */
 const sendEmailFromTemplate = async (req, res) => {
+  console.log(req.body);
   try {
+    // Validating data of the email
     const dataTemplate = createDataTemplate(req, res);
 
+    if (dataTemplate.errors) {
+      return res.status(200).json({
+        message: dataTemplate.errors,
+      });
+    }
+
+    // Renders the info in the email
     const html = renderTemplate(pathTemplate, dataTemplate);
 
+    // Validates the info of the email
     const email = createDataEmail(req, res, rulesEmail);
-    email.html = html;
+    if (email.errors) {
+      return res.status(200).json({
+        message: email.errors,
+      });
+    }
+    email.data.html = html;
 
+    // Sending the email
     await dispatchEmail(email);
 
     return res.status(200).json({
       message: "Message sent successfully",
     });
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
+    return res.status(500).send({
+      message: error,
     });
   }
 };
@@ -120,10 +150,20 @@ const sendEmailFromTemplate = async (req, res) => {
 const addEmailToQueueFromTemplate = async (req, res) => {
   try {
     const dataTemplate = createDataTemplate(req, res);
+    if (dataTemplate.errors) {
+      return res.status(200).json({
+        message: dataTemplate.errors,
+      });
+    }
 
     const html = renderTemplate(pathTemplate, dataTemplate);
 
     const email = createDataEmail(req, res, rulesEmail);
+    if (email.errors) {
+      return res.status(200).json({
+        message: email.errors,
+      });
+    }
     email.html = html;
 
     await Queue.create([email]);
@@ -151,6 +191,11 @@ const addEmailToQueueFromTemplate = async (req, res) => {
 const addListEmailsToQueueFromTemplate = async (req, res) => {
   try {
     const dataTemplate = createDataTemplate(req, res);
+    if (dataTemplate.errors) {
+      return res.status(200).json({
+        message: dataTemplate.errors,
+      });
+    }
 
     const html = renderTemplate(pathTemplate, dataTemplate);
 
