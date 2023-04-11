@@ -116,7 +116,7 @@ const sendEmailFromTemplate = async (req, res) => {
     }
 
     // Renders the info in the email
-    const html = renderTemplate(pathTemplate, dataTemplate);
+    const html = renderTemplate(pathTemplate, dataTemplate.data);
 
     // Validates the info of the email
     const email = createDataEmail(req, res, rulesEmail);
@@ -128,7 +128,7 @@ const sendEmailFromTemplate = async (req, res) => {
     email.data.html = html;
 
     // Sending the email
-    await dispatchEmail(email);
+    await dispatchEmail(email.data);
 
     return res.status(200).json({
       message: "Message sent successfully",
@@ -156,7 +156,7 @@ const addEmailToQueueFromTemplate = async (req, res) => {
       });
     }
 
-    const html = renderTemplate(pathTemplate, dataTemplate);
+    const html = renderTemplate(pathTemplate, dataTemplate.data);
 
     const email = createDataEmail(req, res, rulesEmail);
     if (email.errors) {
@@ -166,7 +166,7 @@ const addEmailToQueueFromTemplate = async (req, res) => {
     }
     email.html = html;
 
-    await Queue.create([email]);
+    await Queue.create([email.data]);
 
     return res.status(200).json({
       success: true,
@@ -197,7 +197,7 @@ const addListEmailsToQueueFromTemplate = async (req, res) => {
       });
     }
 
-    const html = renderTemplate(pathTemplate, dataTemplate);
+    const html = renderTemplate(pathTemplate, dataTemplate.data);
 
     // Creating the array of mailables
     let emailsToQueue = [];
@@ -252,7 +252,7 @@ const addEmailsToQueueFromCsvFromTemplate = async (req, res) => {
 
     // Render template
     const dataTemplate = createDataTemplate(req, res);
-    const html = renderTemplate(pathTemplate, dataTemplate);
+    const html = renderTemplate(pathTemplate, dataTemplate.data);
 
     // Create objects of emails
     let data = [];
