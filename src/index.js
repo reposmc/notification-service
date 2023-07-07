@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const fileUpload = require("express-fileupload");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 
 require("dotenv").config();
@@ -15,13 +16,9 @@ const app = express();
 require("./cron");
 
 //Middleware
-app.use(express.json());
+app.use(bodyParser.json({ limit: '200mb' }));
+app.use(bodyParser.urlencoded({ limit: '200mb', extended: true }));
 app.use(morgan("dev"));
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
 app.use(fileUpload());
 app.use(cors());
 
