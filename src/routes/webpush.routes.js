@@ -7,6 +7,6 @@ const {
 const router = Router();
 
 router.post("/subscribe", subscribe);
-router.get("/sendNotification", sendNotification);
+router.post("/sendNotification", sendNotification);
 
 module.exports = router;

@@ -10,6 +10,7 @@ const Notifiable = new mongoose.model("Notifiable", {
     p256dh: "String",
     auth: "String",
   },
+  email: "String",
 });
 
 module.exports = Notifiable;

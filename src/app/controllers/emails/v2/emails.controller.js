@@ -287,6 +287,13 @@ const addEmailsToQueueFromCsvFromTemplate = async (req, res) => {
 };
 
 module.exports = {
+  pathTemplate,
+  rulesEmail,
+
+  createDataTemplate,
+  renderTemplate,
+  createDataEmail,
+  dispatchEmail,
   sendEmailFromTemplate,
   addEmailToQueueFromTemplate,
   addListEmailsToQueueFromTemplate,
