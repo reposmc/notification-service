@@ -3,58 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta
-        http-equiv="X-UA-Compatible"
-        content="IE=edge"
-    >
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-    <link
-        href="https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap"
-        rel="stylesheet"
-    >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap" rel="stylesheet">
     <title>Notificación</title>
+
+    <style>
+        p {
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
     <center>
         <table
             style='width: 600px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 0;font-family: "ProximaNova", sans-serif;border-collapse: collapse !important;height: 100% !important;'
-            align="center"
-            border="0"
-            cellpadding="0"
-            cellspacing="0"
-            height="100%"
-            width="100%"
-            id="bodyTable"
-        >
+            align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
             <tr>
-                <td
-                    align="center"
-                    valign="top"
-                    id="bodyCell"
-                    style='-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 20px;font-family: "ProximaNova", sans-serif;height: 100% !important;'
-                >
+                <td align="center" valign="top" id="bodyCell"
+                    style='-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 20px;font-family: "ProximaNova", sans-serif;height: 100% !important;'>
                     <div class="main">
                         <p
                             style="text-align: center;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%; margin-bottom: 30px;">
-                            <img
-                                src="https://login.cultura.gob.sv/logos/Cultura_logo.jpg"
-                                width="275"
+                            <img src="https://login.cultura.gob.sv/logos/Cultura_logo.jpg" width="275"
                                 alt="Your logo goes here"
-                                style="-ms-interpolation-mode: bicubic;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"
-                            />
+                                style="-ms-interpolation-mode: bicubic;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;" />
                         </p>
 
                         {{#if (isdefined title)}}
@@ -62,7 +38,7 @@
                         {{/if}}
 
                         {{#if (isdefined introduction)}}
-                        <p>{{{ introduction }}}</p>
+                        <p class="text">{{{ introduction }}}</p>
                         {{/if}}
 
                         {{#if (isdefined url)}}
@@ -72,16 +48,11 @@
                         {{/if}}
 
                         {{#if (isdefined urlImage)}}
-                        <img
-                            src="{{ urlImage }}"
-                            alt="imagen"
-                            width="100%"
-                            height="auto"
-                        />
+                        <img src="{{ urlImage }}" alt="imagen" width="100%" height="auto" />
                         {{/if}}
 
                         {{#if (isdefined text)}}
-                        <p>{{{ text }}}</p>
+                        <p class="text">{{{ text }}}</p>
                         {{/if}}
 
                         {{#if (isdefined applicationName)}}

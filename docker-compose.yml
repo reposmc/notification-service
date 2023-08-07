@@ -16,7 +16,7 @@ services:
     expose:
       - 3000
     networks:
-      - api-network
+      api-network:
   
   npm:
     image: node:18-alpine
@@ -26,3 +26,5 @@ services:
     entrypoint: ["npm"]
     logging:
       driver: none
+    networks:
+      api-network:

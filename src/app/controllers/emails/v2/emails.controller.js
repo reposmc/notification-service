@@ -125,6 +125,7 @@ const sendEmailFromTemplate = async (req, res) => {
         message: email.errors,
       });
     }
+
     email.data.html = html;
 
     // Sending the email
@@ -164,7 +165,7 @@ const addEmailToQueueFromTemplate = async (req, res) => {
         message: email.errors,
       });
     }
-    email.html = html;
+    email.data.html = html;
 
     await Queue.create([email.data]);
 
