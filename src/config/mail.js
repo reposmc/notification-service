@@ -5,9 +5,12 @@ const mail = {
    *
    */
   nodemailer: {
+    pool: true,
     host: process.env.MAIL_HOST, // sender address
     port: process.env.MAIL_PORT * 1,
     secure: process.env.MAIL_SECURE == "true", // true for 465, false for other ports
+    maxConnections: 5,
+    maxMessages: Infinity,
     auth: {
       user: process.env.MAIL_USERNAME, // generated ethereal user
       pass: process.env.MAIL_PASSWORD, // generated ethereal password
